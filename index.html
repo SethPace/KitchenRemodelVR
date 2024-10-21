@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <title>Interactive Virtual Kitchen</title>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Basic lighting -->
+      <a-light type="ambient" color="#ffffff"></a-light>
+      <a-light type="directional" intensity="0.5" position="1 1 0"></a-light>
+
+      <!-- The floor of the kitchen -->
+      <a-plane color="#8B4513" height="100" width="100" rotation="-90 0 0" position="0 0 0"></a-plane>
+
+      <!-- Example kitchen table -->
+      <a-box id="table" color="#ffffff" depth="2" height="1" width="4" position="0 0.5 -3"></a-box>
+
+      <!-- Example cabinets -->
+      <a-box id="cabinet" color="#8B4513" depth="0.5" height="3" width="1" position="2 1.5 -2"></a-box>
+
+      <!-- Example kitchen counter -->
+      <a-box id="counter" color="#C0C0C0" depth="1" height="1" width="3" position="-2 0.5 -3"></a-box>
+
+      <!-- User camera -->
+      <a-camera position="0 1.6 5">
+        <a-cursor></a-cursor>
+      </a-camera>
+    </a-scene>
+
+    <!-- This is where you put the interactivity and material change code -->
+    <script>
+      // Interactivity: Change table color when clicked
+      document.querySelector('#table').addEventListener('click', function () {
+        this.setAttribute('color', '#00ff00');  // Change to green
+      });
+
+      // Interactivity: Change cabinet material on click
+      document.querySelector('#cabinet').addEventListener('click', function () {
+        this.setAttribute('material', 'src: #woodTexture');  // Change to wood texture
+      });
+    </script>
+
+    <!-- Assets like textures go in the <a-assets> tag -->
+    <a-assets>
+      <img id="woodTexture" src="path-to-wood-texture.jpg">
+    </a-assets>
+
+  </body>
+</html>
+

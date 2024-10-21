@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <title>Interactive Virtual Kitchen</title>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Assets for textures -->
+      <a-assets>
+        <img id="woodTexture" src="/Users/tkhopkin/Desktop/Human Computer/Sprint 4/360_F_228680721_gGbh5ylrMPMikdBIzWb8N1yGBLg8dmu9.jpg">
+        <img id="marbleTexture" src="https://cdn.aframe.io/a-painter/images/marble.jpg">
+        <img id="metalTexture" src="https://cdn.aframe.io/a-painter/images/metal.jpg">
+      </a-assets>
+
+      <!-- Lighting: Brighter and more dynamic -->
+      <a-light type="ambient" color="#ffffff" intensity="0.5"></a-light>
+      <a-light type="directional" color="#ffffff" intensity="1" position="-1 3 1"></a-light>
+
+      <!-- Kitchen Floor -->
+      <a-plane src="#woodTexture" height="10" width="10" rotation="-90 0 0" position="0 0 0"></a-plane>
+
+      <!-- Kitchen walls -->
+      <a-box position="0 2 -5" depth="0.1" height="4" width="10" color="#e0e0e0"></a-box> <!-- Back wall -->
+      <a-box position="-5 2 0" depth="10" height="4" width="0.1" color="#e0e0e0"></a-box> <!-- Left wall -->
+      <a-box position="5 2 0" depth="10" height="4" width="0.1" color="#e0e0e0"></a-box> <!-- Right wall -->
+
+      <!-- Kitchen Countertop -->
+      <a-box id="counter" src="#marbleTexture" depth="1" height="0.5" width="4" position="0 1 -2"></a-box>
+
+      <!-- Kitchen Cabinets -->
+      <a-box id="cabinet1" color="#8B4513" depth="0.6" height="1.5" width="1.5" position="-1.5 2 -2"></a-box>
+      <a-box id="cabinet2" color="#8B4513" depth="0.6" height="1.5" width="1.5" position="1.5 2 -2"></a-box>
+
+      <!-- Kitchen Island -->
+      <a-box id="island" src="#marbleTexture" depth="2" height="0.8" width="4" position="0 0.8 -0.5"></a-box>
+      <a-box id="islandStorage" color="#C0C0C0" depth="2" height="0.8" width="4" position="0 0.2 -0.5"></a-box>
+
+      <!-- Fridge -->
+      <a-box id="fridge" color="#ffffff" depth="1" height="2.5" width="1.5" position="-4 1.25 -2"></a-box>
+
+      <!-- Dining Table and Chairs -->
+      <a-box id="table" color="#8B4513" depth="2" height="0.5" width="4" position="3 1.2 0"></a-box>
+      <a-box color="#C0C0C0" depth="0.5" height="1" width="0.5" position="4 0.75 1"></a-box> <!-- Chair 1 -->
+      <a-box color="#C0C0C0" depth="0.5" height="1" width="0.5" position="2 0.75 1"></a-box> <!-- Chair 2 -->
+
+      <!-- User camera with cursor -->
+      <a-camera position="0 1.6 5">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+    </a-scene>
+
+    <script>
+      // Change the material of cabinets on click
+      document.querySelector('#cabinet1').addEventListener('click', function () {
+        this.setAttribute('material', 'src: #metalTexture');  // Change to metal texture
+      });
+      document.querySelector('#cabinet2').addEventListener('click', function () {
+        this.setAttribute('material', 'src: #metalTexture');  // Change to metal texture
+      });
+
+      // Change the table color when clicked
+      document.querySelector('#table').addEventListener('click', function () {
+        this.setAttribute('color', '#ff6347');  // Change to a tomato red
+      });
+    </script>
+  </body>
+</html>
