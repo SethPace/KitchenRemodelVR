@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Escape Room for Google Cardboard</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene vr-mode-ui="enabled: true">
+        <!-- Player Entity with Camera and Controls -->
+        <a-entity
+            id="player"
+            camera="fov: 80"
+            wasd-controls
+            look-controls="pointerLockEnabled: false"
+            position="0 1.6 0"
+            dynamic-body="mass: 5; shape: capsule; height: 1.6; radius: 0.3">
+            <!-- Crosshair cursor -->
+            <a-entity
+                cursor="fuse: true; fuseTimeout: 1000"
+                position="0 0 -1"
+                geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+                material="color: #00FFAA; shader: flat"
+                raycaster="objects: .clickable">
+            </a-entity>
+        </a-entity>
+
+      <!-- Assets for textures -->
+      <a-assets>
+        <img id="floorTexture" src="assets/textures/floor.jpg">
+        <img id="picture1" src="assets/textures/picture1.jpg">
+        <img id="picture2" src="assets/textures/picture2.jpg">
+        <img id="picture3" src="assets/textures/picture3.jpg">
+        <img id="picture4" src="assets/textures/picture4.jpg">
+        <img id="picture5" src="assets/textures/picture5.jpg">
+        <img id="picture6" src="assets/textures/picture6.jpg">
+        <img id="picture7" src="assets/textures/picture7.jpg">
+        <img id="picture8" src="assets/textures/picture8.jpg">
+        <img id="picture9" src="assets/textures/picture9.jpg">
+        <img id="picture10" src="assets/textures/picture10.jpg">
+        <img id="picture11" src="assets/textures/picture11.jpg">
+        <img id="picture12" src="assets/textures/picture12.jpg">
+        <img id="picture13" src="assets/textures/picture13.png">
+        <img id="picture14" src="assets/textures/picture14.jpg">
+        <img id="picture15" src="assets/textures/picture15.jpg">
+        <img id="picture16" src="assets/textures/picture16.jpg">
+      </a-assets>
+
+        <!-- Room Walls -->
+        <a-box color="#444" position="0 1.5 5" depth="0.1" width="10" height="3"></a-box> <!-- Front wall -->
+        <a-box color="#444" position="0 1.5 -5" depth="0.1" width="10" height="3"></a-box> <!-- Back wall -->
+        <a-box color="#444" position="-5 1.5 0" rotation="0 90 0" depth="0.1" width="10" height="3"></a-box> <!-- Left wall -->
+        <a-box color="#444" position="5 1.5 0" rotation="0 90 0" depth="0.1" width="10" height="3"></a-box> <!-- Right wall -->
+        <a-box color="#111" position="0 3 0" rotation="90 0 0" depth="0.1" width="10" height="10"></a-box> <!-- Ceiling -->
+
+
+        <!-- Floor with Wooden Texture -->
+        <a-box src="#floorTexture" repeat="5 5" position="0 0 0" rotation="90 0 0" depth="0.1" width="10" height="10"></a-box>
+
+        <!-- Door with Final Exit Key -->
+        <a-box color="red" position="0 1.5 -4.95" depth="0.05" width="1" height="2.5" id="door"></a-box>
+
+        <!-- Pictures on each wall with Frames -->
+        <!-- Back Wall Pictures with Frames -->
+
+        <!-- Picture 1 -->
+        <a-box id="picture1-frame" color="#4B3621" position="-4 1.5 -4.95" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 1 -->
+        <a-plane id="picture1" src="#picture1" position="-4 1.5 -4.9" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 1 Table, leg, box  -->
+        <a-box color="#654321" position="-4 0.5 -4.9" depth="0.5" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="-4.0 0.25 -4.85" radius="0.05" height="0.5"></a-cylinder>
+        <a-box color="#ADD8E6" position="-4 0.7 -4.9" depth="0.4" width="0.4" height="0.3" class="clickable" id="box1"></a-box> <!-- Box on table -->
+
+        <!-- Picture 2 -->
+        <a-box color="#4B3621" position="-2 1.5 -4.95" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 2 -->
+        <a-plane id="picture2" src="#picture2" position="-2 1.5 -4.9" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 2 Table, leg, box  -->
+        <a-box color="#654321" position="-2 0.5 -4.9" depth="0.5" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="-2 0.25 -4.85" radius="0.05" height="0.5"></a-cylinder>
+        <a-box color="#ADD8E6" position="-2 0.7 -4.9" depth="0.4" width="0.4" height="0.3" class="clickable" id="box2"></a-box> <!-- Box on table -->
+
+        <!-- Picture 3 -->
+        <a-box color="#4B3621" position="2 1.5 -4.95" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 3 -->
+        <a-plane id="picture3" src="#picture3" position="2 1.5 -4.9" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 3 Table, leg, box  -->
+        <a-box color="#654321" position="2 0.5 -4.9" depth="0.5" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="2 0.25 -4.85" radius="0.05" height="0.5"></a-cylinder>
+        <a-box color="#ADD8E6" position="2 0.7 -4.9" depth="0.4" width="0.4" height="0.3" class="clickable" id="box3"></a-box> <!-- Box on table -->
+
+        <!-- Picture 4 -->
+        <a-box color="#4B3621" position="4 1.5 -4.95" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 4 -->
+        <a-plane id="picture4" src="#picture4" position="4 1.5 -4.9" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 4 Table, leg, box  -->
+        <a-box color="#654321" position="4 0.5 -4.9" depth="0.5" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="4 0.25 -4.85" radius="0.05" height="0.5"></a-cylinder>
+        <a-box color="#ADD8E6" position="4 0.7 -4.9" depth="0.4" width="0.4" height="0.3" class="clickable" id="box4"></a-box> <!-- Box on table -->
+
+
+        <!-- Left Wall Pictures with Frames -->
+        <!-- Picture 5 -->
+        <a-box color="#4B3621" position="-4.95 1.5 -3" rotation="0 90 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 5 -->
+        <a-plane id="picture5" src="#picture5" position="-4.9 1.5 -3" rotation="0 90 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 5 Table, leg, box  -->
+        <a-box color="#654321" position="-4.9 0.5 -3" depth="0.5" rotation="0 90 0" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="-4.9 0.25 -3" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="-4.9 0.7 -3" depth="0.4" width="0.4" height="0.3" class="clickable" id="box5"></a-box> <!-- Light blue box on table -->
+
+        <!-- Picture 6 -->
+        <a-box color="#4B3621" position="-4.95 1.5 -1" rotation="0 90 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 6 -->
+        <a-plane id="picture6" src="#picture6" position="-4.9 1.5 -1" rotation="0 90 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 6 Table, leg, box  -->
+        <a-box color="#654321" position="-4.9 0.5 -1" depth="0.5" rotation="0 90 0" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="-4.9 0.25 -1" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="-4.9 0.7 -1" depth="0.4" width="0.4" height="0.3" class="clickable" id="box6"></a-box> <!-- Light blue box on table -->
+
+        <!-- Picture 7 -->
+        <a-box color="#4B3621" position="-4.95 1.5 1" rotation="0 90 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 7 -->
+        <a-plane id="picture7" src="#picture7" position="-4.9 1.5 1" rotation="0 90 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 7 Table, leg, box  -->
+        <a-box color="#654321" position="-4.9 0.5 1" depth="0.5" rotation="0 90 0" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="-4.9 0.25 1" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="-4.9 0.7 1" depth="0.4" width="0.4" height="0.3" class="clickable" id="box7"></a-box> <!-- Light blue box on table -->
+
+        <!-- Picture 8 -->
+        <a-box color="#4B3621" position="-4.95 1.5 3" rotation="0 90 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 8 -->
+        <a-plane id="picture8" src="#picture8" position="-4.9 1.5 3" rotation="0 90 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 8 Table, leg, box  -->
+        <a-box color="#654321" position="-4.9 0.5 3" depth="0.5" rotation="0 90 0" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="-4.9 0.25 3" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="-4.9 0.7 3" depth="0.4" width="0.4" height="0.3" class="clickable" id="box8"></a-box> <!-- Light blue box on table -->
+
+        <!-- Right Wall Pictures with Frames -->
+        <!-- Picture 9 -->
+        <a-box color="#4B3621" position="4.95 1.5 -3" rotation="0 -90 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 9 -->
+        <a-plane id="picture9" src="#picture9" position="4.9 1.5 -3" rotation="0 -90 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 9 Table, leg, box -->
+        <a-box color="#654321" position="4.9 0.5 -3" depth="0.5" width="1" rotation="0 -90 0" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="4.9 0.25 -3" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="4.9 0.7 -3" depth="0.4" width="0.4" height="0.3" class="clickable" id="box9"></a-box> <!-- Light blue box on table -->
+
+        <!-- Picture 10 -->
+        <a-box color="#4B3621" position="4.95 1.5 -1" rotation="0 -90 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 10 -->
+        <a-plane id="picture10" src="#picture10" position="4.9 1.5 -1" rotation="0 -90 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 10 Table, leg, box -->
+        <a-box color="#654321" position="4.9 0.5 -1" depth="0.5" width="1" rotation="0 -90 0" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="4.9 0.25 -1" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="4.9 0.7 -1" depth="0.4" width="0.4" height="0.3" class="clickable" id="box10"></a-box> <!-- Light blue box on table -->
+
+        <!-- Picture 11 -->
+        <a-box color="#4B3621" position="4.95 1.5 1" rotation="0 -90 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 11 -->
+        <a-plane id="picture11" src="#picture11" position="4.9 1.5 1" rotation="0 -90 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 11 Table, leg, box -->
+        <a-box color="#654321" position="4.9 0.5 1" depth="0.5" width="1" rotation="0 -90 0" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="4.9 0.25 1" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="4.9 0.7 1" depth="0.4" width="0.4" height="0.3" class="clickable" id="box11"></a-box> <!-- Light blue box on table -->
+
+        <!-- Picture 12 -->
+        <a-box color="#4B3621" position="4.95 1.5 3" rotation="0 -90 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 12 -->
+        <a-plane id="picture12" src="#picture12" position="4.9 1.5 3" rotation="0 -90 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 12 Table, leg, box -->
+        <a-box color="#654321" position="4.9 0.5 3" depth="0.5" width="1" rotation="0 -90 0" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="4.9 0.25 3" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="4.9 0.7 3" depth="0.4" width="0.4" height="0.3" class="clickable" id="box12"></a-box> <!-- Light blue box on table -->
+
+        <!-- Front Wall Pictures with Frames -->
+        <!-- Picture 13 -->
+        <a-box color="#4B3621" position="-3 1.5 4.95" rotation="0 180 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 13 -->
+        <a-plane id="picture13" src="#picture13" position="-3 1.5 4.9" rotation="0 180 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 13 Table, leg, box -->
+        <a-box color="#654321" position="-3 0.5 4.9" depth="0.5" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="-3 0.25 4.8" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="-3 0.7 4.9" depth="0.4" width="0.4" height="0.3" class="clickable" id="box13"></a-box> <!-- Light blue box on table -->
+
+        <!-- Picture 14 -->
+        <a-box color="#4B3621" position="-1 1.5 4.95" rotation="0 180 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 14 -->
+        <a-plane id="picture14" src="#picture14" position="-1 1.5 4.9" rotation="0 180 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 14 Table, leg, box -->
+        <a-box color="#654321" position="-1 0.5 4.9" depth="0.5" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="-1 0.25 4.8" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="-1 0.7 4.9" depth="0.4" width="0.4" height="0.3" class="clickable" id="box14"></a-box> <!-- Light blue box on table -->
+
+        <!-- Picture 15 -->
+        <a-box color="#4B3621" position="1 1.5 4.95" rotation="0 180 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 15 -->
+        <a-plane id="picture15" src="#picture15" position="1 1.5 4.9" rotation="0 180 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 13 Table, leg, box -->
+        <a-box color="#654321" position="1 0.5 4.9" depth="0.5" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="1 0.25 4.8" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="1 0.7 4.9" depth="0.4" width="0.4" height="0.3" class="clickable" id="box15"></a-box> <!-- Light blue box on table -->
+
+        <!-- Picture 16 -->
+        <a-box color="#4B3621" position="3 1.5 4.95" rotation="0 180 0" depth="0.05" width="1.1" height="1.1"></a-box> <!-- Frame for Picture 16 -->
+        <a-plane id="picture16" src="#picture16" position="3 1.5 4.9" rotation="0 180 0" width="1" height="1" class="clickable"></a-plane>
+        <!-- Picture 13 Table, leg, box -->
+        <a-box color="#654321" position="3 0.5 4.9" depth="0.5" width="1" height="0.1"></a-box> <!-- Table top -->
+        <a-cylinder color="#654321" position="3 0.25 4.8" radius="0.05" height="0.5"></a-cylinder> <!-- Table leg -->
+        <a-box color="#ADD8E6" position="3 0.7 4.9" depth="0.4" width="0.4" height="0.3" class="clickable" id="box16"></a-box> <!-- Light blue box on table -->
+
+
+      <!-- JavaScript for Interactions -->
+      <script>
+        // Initial riddle on page load
+        window.onload = function () {
+          alert("You are stuck in an art gallary! Fortunatley there are a series of keys and riddles to help you escape, click on the box to unlock find the next and key and riddle to you escape! Riddle 1: 'I am a beauty that blossoms, but I fade away. What am I?'");
+        };
+
+        // Event listeners for sequential riddles
+        document.querySelector("#box1").addEventListener("click", function () {
+          alert("A key was found! Riddle 2: 'I can be gentle or fierce, calming or wild. I move without legs, touch without hands, and I'm felt from miles away. What am I?");
+          document.querySelector("#box1").setAttribute("color", "green");
+        });
+
+        document.querySelector("#box14").addEventListener("click", function () {
+          alert("Key Found! Riddle 3: 'I have buildings and lights, busy days and quiet nights. What am I?'");
+          document.querySelector("#box14").setAttribute("color", "green");
+        });
+
+        document.querySelector("#box2").addEventListener("click", function () {
+          alert("Key Found! Riddle 4: 'I was a star who shined bright, with blonde hair and a dazzling sight. Known for my charm and famous sway, who am I from Hollywood's golden day?'");
+          document.querySelector("#box2").setAttribute("color", "green");
+        });
+
+        document.querySelector("#box12").addEventListener("click", function () {
+          alert("Key Found! Riddle 5: 'If it is a stary night there is only one way to make your Van Gough...'");
+          document.querySelector("#box12").setAttribute("color", "green");
+        });
+
+        document.querySelector("#box5").addEventListener("click", function () {
+          alert("Key Found! Riddle 6: 'I’m known for my laid-back flow, with rhymes and beats that steal the show. From the West Coast scene, I rose with ease, who am I, chillin' with gin and juice under palm trees?'");
+          document.querySelector("#box5").setAttribute("color", "green");
+        });
+
+        document.querySelector("#box9").addEventListener("click", function () {
+          alert("Congratulations! You have found the key to the door which is now green. You may now escape.");
+          document.querySelector("#door").setAttribute("color", "green");
+          document.querySelector("#box9").setAttribute("color", "green");
+        });
+
+        // Try Agains
+
+        document.querySelector("#box3").addEventListener("click", function () {
+          alert("Try Again");
+          document.querySelector("#box3").setAttribute("color", "red");
+        });
+
+        document.querySelector("#box4").addEventListener("click", function () {
+          alert("Try Again");
+          document.querySelector("#box4").setAttribute("color", "red");
+        });
+
+        document.querySelector("#box6").addEventListener("click", function () {
+          alert("Try Again");
+          document.querySelector("#box6").setAttribute("color", "red");
+        });
+
+        document.querySelector("#box7").addEventListener("click", function () {
+          alert("Try Again");
+          document.querySelector("#box7").setAttribute("color", "red");
+        });
+
+        document.querySelector("#box8").addEventListener("click", function () {
+          alert("Try Again");
+          document.querySelector("#box8").setAttribute("color", "red");
+        });
+
+        document.querySelector("#box10").addEventListener("click", function () {
+          alert("Try Again");
+          document.querySelector("#box10").setAttribute("color", "red");
+        });
+
+        document.querySelector("#box11").addEventListener("click", function () {
+          alert("Try Again");
+          document.querySelector("#box11").setAttribute("color", "red");
+        });
+
+        document.querySelector("#box13").addEventListener("click", function () {
+          alert("Try Again");
+          document.querySelector("#box13").setAttribute("color", "red");
+        });
+
+        document.querySelector("#box16").addEventListener("click", function () {
+          alert("Try Again");
+          document.querySelector("#box16").setAttribute("color", "red");
+        });
+
+      </script>
+    </a-scene>
+  </body>
+</html>
